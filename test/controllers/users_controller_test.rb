@@ -43,4 +43,18 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
   
+  test "ログインしてない時にdestroyすると飛ぶはず" do
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user
+    end
+    assert_redirected_to login_url
+  end
+  
+  test "非管理者でログインしてる時にdestroyすると飛ぶはず" do
+    log_in_as(@other_user)
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user
+    end
+    assert_redirected_to root_url
+  end
 end
