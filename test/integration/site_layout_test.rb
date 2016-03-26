@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+  
   test "layout links" do
     get root_path
     assert_template 'static_pages/home'
@@ -9,16 +13,4 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
   end
-  
-  test "サインアップページのページタイトル" do
-    get signup_path
-    # assert_response :success
-    # assert_select "title", "Sign up | Ruby on Rails Tutorial Sample App"
-    assert_select "title", full_title("Sign up")
-    
-  end
-  
-  # test "the truth" do
-  #   assert true
-  # end
 end
