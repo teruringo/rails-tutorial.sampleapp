@@ -4,8 +4,7 @@ require 'test_helper'
 class MicropostTest < ActiveSupport::TestCase
   def setup
     @user = users(:michael)
-    # 次の行は慣習的に間違っている
-    @micropost = Micropost.new(content: "Lorem ipsum", user_id: @user.id)
+    @micropost = @user.microposts.build(content: "Lorem ipsum")
   end
   
   test "should be valid" do
@@ -25,9 +24,5 @@ class MicropostTest < ActiveSupport::TestCase
   test "content should be at most 140 chs." do
     @micropost.content = "a" * 141
     assert_not @micropost.valid?
-  end
-    
-  end
-    
   end
 end
